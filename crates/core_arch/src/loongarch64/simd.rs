@@ -1,7 +1,7 @@
 //! LoongArch64 SIMD helpers
 
-use crate::intrinsics::simd::*;
 use crate::core_arch::simd::*;
+use crate::intrinsics::simd::*;
 
 // Internal extension trait for concrete `Simd<T, N>` types.
 //
@@ -328,10 +328,7 @@ pub(super) const unsafe fn simd_ext_sat_unsigned<T: Copy + const SimdExt>(a: T, 
         return a;
     }
     let max_val = (1i64 << (imm + 1)) - 1;
-    simd_imax(
-        simd_imin(a, simd_ext_splat(max_val)),
-        simd_ext_splat(0),
-    )
+    simd_imax(simd_imin(a, simd_ext_splat(max_val)), simd_ext_splat(0))
 }
 
 macro_rules! impl_vv {

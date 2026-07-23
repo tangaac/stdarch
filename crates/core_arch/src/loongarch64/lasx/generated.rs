@@ -179,22 +179,6 @@ unsafe extern "unadjusted" {
     fn __lasx_xvfcvt_h_s(a: __v8f32, b: __v8f32) -> __v16i16;
     #[link_name = "llvm.loongarch.lasx.xvfcvt.s.d"]
     fn __lasx_xvfcvt_s_d(a: __v4f64, b: __v4f64) -> __v8f32;
-    #[link_name = "llvm.loongarch.lasx.xvfmin.s"]
-    fn __lasx_xvfmin_s(a: __v8f32, b: __v8f32) -> __v8f32;
-    #[link_name = "llvm.loongarch.lasx.xvfmin.d"]
-    fn __lasx_xvfmin_d(a: __v4f64, b: __v4f64) -> __v4f64;
-    #[link_name = "llvm.loongarch.lasx.xvfmina.s"]
-    fn __lasx_xvfmina_s(a: __v8f32, b: __v8f32) -> __v8f32;
-    #[link_name = "llvm.loongarch.lasx.xvfmina.d"]
-    fn __lasx_xvfmina_d(a: __v4f64, b: __v4f64) -> __v4f64;
-    #[link_name = "llvm.loongarch.lasx.xvfmax.s"]
-    fn __lasx_xvfmax_s(a: __v8f32, b: __v8f32) -> __v8f32;
-    #[link_name = "llvm.loongarch.lasx.xvfmax.d"]
-    fn __lasx_xvfmax_d(a: __v4f64, b: __v4f64) -> __v4f64;
-    #[link_name = "llvm.loongarch.lasx.xvfmaxa.s"]
-    fn __lasx_xvfmaxa_s(a: __v8f32, b: __v8f32) -> __v8f32;
-    #[link_name = "llvm.loongarch.lasx.xvfmaxa.d"]
-    fn __lasx_xvfmaxa_d(a: __v4f64, b: __v4f64) -> __v4f64;
     #[link_name = "llvm.loongarch.lasx.xvfclass.s"]
     fn __lasx_xvfclass_s(a: __v8f32) -> __v8i32;
     #[link_name = "llvm.loongarch.lasx.xvfclass.d"]
@@ -1599,62 +1583,6 @@ pub fn lasx_xvfcvt_h_s(a: m256, b: m256) -> m256i {
 #[unstable(feature = "stdarch_loongarch", issue = "117427")]
 pub fn lasx_xvfcvt_s_d(a: m256d, b: m256d) -> m256 {
     unsafe { transmute(__lasx_xvfcvt_s_d(transmute(a), transmute(b))) }
-}
-
-#[inline]
-#[target_feature(enable = "lasx")]
-#[unstable(feature = "stdarch_loongarch", issue = "117427")]
-pub fn lasx_xvfmin_s(a: m256, b: m256) -> m256 {
-    unsafe { transmute(__lasx_xvfmin_s(transmute(a), transmute(b))) }
-}
-
-#[inline]
-#[target_feature(enable = "lasx")]
-#[unstable(feature = "stdarch_loongarch", issue = "117427")]
-pub fn lasx_xvfmin_d(a: m256d, b: m256d) -> m256d {
-    unsafe { transmute(__lasx_xvfmin_d(transmute(a), transmute(b))) }
-}
-
-#[inline]
-#[target_feature(enable = "lasx")]
-#[unstable(feature = "stdarch_loongarch", issue = "117427")]
-pub fn lasx_xvfmina_s(a: m256, b: m256) -> m256 {
-    unsafe { transmute(__lasx_xvfmina_s(transmute(a), transmute(b))) }
-}
-
-#[inline]
-#[target_feature(enable = "lasx")]
-#[unstable(feature = "stdarch_loongarch", issue = "117427")]
-pub fn lasx_xvfmina_d(a: m256d, b: m256d) -> m256d {
-    unsafe { transmute(__lasx_xvfmina_d(transmute(a), transmute(b))) }
-}
-
-#[inline]
-#[target_feature(enable = "lasx")]
-#[unstable(feature = "stdarch_loongarch", issue = "117427")]
-pub fn lasx_xvfmax_s(a: m256, b: m256) -> m256 {
-    unsafe { transmute(__lasx_xvfmax_s(transmute(a), transmute(b))) }
-}
-
-#[inline]
-#[target_feature(enable = "lasx")]
-#[unstable(feature = "stdarch_loongarch", issue = "117427")]
-pub fn lasx_xvfmax_d(a: m256d, b: m256d) -> m256d {
-    unsafe { transmute(__lasx_xvfmax_d(transmute(a), transmute(b))) }
-}
-
-#[inline]
-#[target_feature(enable = "lasx")]
-#[unstable(feature = "stdarch_loongarch", issue = "117427")]
-pub fn lasx_xvfmaxa_s(a: m256, b: m256) -> m256 {
-    unsafe { transmute(__lasx_xvfmaxa_s(transmute(a), transmute(b))) }
-}
-
-#[inline]
-#[target_feature(enable = "lasx")]
-#[unstable(feature = "stdarch_loongarch", issue = "117427")]
-pub fn lasx_xvfmaxa_d(a: m256d, b: m256d) -> m256d {
-    unsafe { transmute(__lasx_xvfmaxa_d(transmute(a), transmute(b))) }
 }
 
 #[inline]

@@ -185,22 +185,6 @@ unsafe extern "unadjusted" {
     fn __lsx_vfcvt_h_s(a: __v4f32, b: __v4f32) -> __v8i16;
     #[link_name = "llvm.loongarch.lsx.vfcvt.s.d"]
     fn __lsx_vfcvt_s_d(a: __v2f64, b: __v2f64) -> __v4f32;
-    #[link_name = "llvm.loongarch.lsx.vfmin.s"]
-    fn __lsx_vfmin_s(a: __v4f32, b: __v4f32) -> __v4f32;
-    #[link_name = "llvm.loongarch.lsx.vfmin.d"]
-    fn __lsx_vfmin_d(a: __v2f64, b: __v2f64) -> __v2f64;
-    #[link_name = "llvm.loongarch.lsx.vfmina.s"]
-    fn __lsx_vfmina_s(a: __v4f32, b: __v4f32) -> __v4f32;
-    #[link_name = "llvm.loongarch.lsx.vfmina.d"]
-    fn __lsx_vfmina_d(a: __v2f64, b: __v2f64) -> __v2f64;
-    #[link_name = "llvm.loongarch.lsx.vfmax.s"]
-    fn __lsx_vfmax_s(a: __v4f32, b: __v4f32) -> __v4f32;
-    #[link_name = "llvm.loongarch.lsx.vfmax.d"]
-    fn __lsx_vfmax_d(a: __v2f64, b: __v2f64) -> __v2f64;
-    #[link_name = "llvm.loongarch.lsx.vfmaxa.s"]
-    fn __lsx_vfmaxa_s(a: __v4f32, b: __v4f32) -> __v4f32;
-    #[link_name = "llvm.loongarch.lsx.vfmaxa.d"]
-    fn __lsx_vfmaxa_d(a: __v2f64, b: __v2f64) -> __v2f64;
     #[link_name = "llvm.loongarch.lsx.vfclass.s"]
     fn __lsx_vfclass_s(a: __v4f32) -> __v4i32;
     #[link_name = "llvm.loongarch.lsx.vfclass.d"]
@@ -1540,62 +1524,6 @@ pub fn lsx_vfcvt_h_s(a: m128, b: m128) -> m128i {
 #[unstable(feature = "stdarch_loongarch", issue = "117427")]
 pub fn lsx_vfcvt_s_d(a: m128d, b: m128d) -> m128 {
     unsafe { transmute(__lsx_vfcvt_s_d(transmute(a), transmute(b))) }
-}
-
-#[inline]
-#[target_feature(enable = "lsx")]
-#[unstable(feature = "stdarch_loongarch", issue = "117427")]
-pub fn lsx_vfmin_s(a: m128, b: m128) -> m128 {
-    unsafe { transmute(__lsx_vfmin_s(transmute(a), transmute(b))) }
-}
-
-#[inline]
-#[target_feature(enable = "lsx")]
-#[unstable(feature = "stdarch_loongarch", issue = "117427")]
-pub fn lsx_vfmin_d(a: m128d, b: m128d) -> m128d {
-    unsafe { transmute(__lsx_vfmin_d(transmute(a), transmute(b))) }
-}
-
-#[inline]
-#[target_feature(enable = "lsx")]
-#[unstable(feature = "stdarch_loongarch", issue = "117427")]
-pub fn lsx_vfmina_s(a: m128, b: m128) -> m128 {
-    unsafe { transmute(__lsx_vfmina_s(transmute(a), transmute(b))) }
-}
-
-#[inline]
-#[target_feature(enable = "lsx")]
-#[unstable(feature = "stdarch_loongarch", issue = "117427")]
-pub fn lsx_vfmina_d(a: m128d, b: m128d) -> m128d {
-    unsafe { transmute(__lsx_vfmina_d(transmute(a), transmute(b))) }
-}
-
-#[inline]
-#[target_feature(enable = "lsx")]
-#[unstable(feature = "stdarch_loongarch", issue = "117427")]
-pub fn lsx_vfmax_s(a: m128, b: m128) -> m128 {
-    unsafe { transmute(__lsx_vfmax_s(transmute(a), transmute(b))) }
-}
-
-#[inline]
-#[target_feature(enable = "lsx")]
-#[unstable(feature = "stdarch_loongarch", issue = "117427")]
-pub fn lsx_vfmax_d(a: m128d, b: m128d) -> m128d {
-    unsafe { transmute(__lsx_vfmax_d(transmute(a), transmute(b))) }
-}
-
-#[inline]
-#[target_feature(enable = "lsx")]
-#[unstable(feature = "stdarch_loongarch", issue = "117427")]
-pub fn lsx_vfmaxa_s(a: m128, b: m128) -> m128 {
-    unsafe { transmute(__lsx_vfmaxa_s(transmute(a), transmute(b))) }
-}
-
-#[inline]
-#[target_feature(enable = "lsx")]
-#[unstable(feature = "stdarch_loongarch", issue = "117427")]
-pub fn lsx_vfmaxa_d(a: m128d, b: m128d) -> m128d {
-    unsafe { transmute(__lsx_vfmaxa_d(transmute(a), transmute(b))) }
 }
 
 #[inline]

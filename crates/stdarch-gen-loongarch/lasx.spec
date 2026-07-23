@@ -1810,41 +1810,49 @@ asm-fmts = xd, xj, xk
 data-types = V8SF, V4DF, V4DF
 
 /// lasx_xvfmin_s
+impl = portable
 name = lasx_xvfmin_s
 asm-fmts = xd, xj, xk
 data-types = V8SF, V8SF, V8SF
 
 /// lasx_xvfmin_d
+impl = portable
 name = lasx_xvfmin_d
 asm-fmts = xd, xj, xk
 data-types = V4DF, V4DF, V4DF
 
 /// lasx_xvfmina_s
+impl = portable
 name = lasx_xvfmina_s
 asm-fmts = xd, xj, xk
 data-types = V8SF, V8SF, V8SF
 
 /// lasx_xvfmina_d
+impl = portable
 name = lasx_xvfmina_d
 asm-fmts = xd, xj, xk
 data-types = V4DF, V4DF, V4DF
 
 /// lasx_xvfmax_s
+impl = portable
 name = lasx_xvfmax_s
 asm-fmts = xd, xj, xk
 data-types = V8SF, V8SF, V8SF
 
 /// lasx_xvfmax_d
+impl = portable
 name = lasx_xvfmax_d
 asm-fmts = xd, xj, xk
 data-types = V4DF, V4DF, V4DF
 
 /// lasx_xvfmaxa_s
+impl = portable
 name = lasx_xvfmaxa_s
 asm-fmts = xd, xj, xk
 data-types = V8SF, V8SF, V8SF
 
 /// lasx_xvfmaxa_d
+impl = portable
 name = lasx_xvfmaxa_d
 asm-fmts = xd, xj, xk
 data-types = V4DF, V4DF, V4DF

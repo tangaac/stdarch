@@ -119,6 +119,32 @@ pub(super) const unsafe fn simd_ext_fnmsub<T: Copy>(a: T, b: T, c: T) -> T {
 
 #[inline(always)]
 #[rustc_const_unstable(feature = "stdarch_const_helpers", issue = "none")]
+pub(super) const unsafe fn simd_ext_fmax<T: Copy, U: Copy>(a: T, b: T) -> T {
+    simd_select::<U, _>(simd_gt(a, b), a, b)
+}
+
+#[inline(always)]
+#[rustc_const_unstable(feature = "stdarch_const_helpers", issue = "none")]
+pub(super) const unsafe fn simd_ext_fmin<T: Copy, U: Copy>(a: T, b: T) -> T {
+    simd_select::<U, _>(simd_lt(a, b), a, b)
+}
+
+#[inline(always)]
+#[rustc_const_unstable(feature = "stdarch_const_helpers", issue = "none")]
+pub(super) const unsafe fn simd_ext_fmaxa<T: Copy, U: Copy>(a: T, b: T) -> T {
+    let m: U = simd_ge(simd_fabs(a), simd_fabs(b));
+    simd_select::<U, _>(m, a, b)
+}
+
+#[inline(always)]
+#[rustc_const_unstable(feature = "stdarch_const_helpers", issue = "none")]
+pub(super) const unsafe fn simd_ext_fmina<T: Copy, U: Copy>(a: T, b: T) -> T {
+    let m: U = simd_le(simd_fabs(a), simd_fabs(b));
+    simd_select::<U, _>(m, a, b)
+}
+
+#[inline(always)]
+#[rustc_const_unstable(feature = "stdarch_const_helpers", issue = "none")]
 pub(super) const unsafe fn simd_ext_frecip_s<T: Copy>(a: T) -> T {
     simd_div(simd_splat(1.0f32), a)
 }

@@ -1897,41 +1897,49 @@ asm-fmts = vd, vj, vk
 data-types = V4SF, V2DF, V2DF
 
 /// lsx_vfmin_s
+impl = portable
 name = lsx_vfmin_s
 asm-fmts = vd, vj, vk
 data-types = V4SF, V4SF, V4SF
 
 /// lsx_vfmin_d
+impl = portable
 name = lsx_vfmin_d
 asm-fmts = vd, vj, vk
 data-types = V2DF, V2DF, V2DF
 
 /// lsx_vfmina_s
+impl = portable
 name = lsx_vfmina_s
 asm-fmts = vd, vj, vk
 data-types = V4SF, V4SF, V4SF
 
 /// lsx_vfmina_d
+impl = portable
 name = lsx_vfmina_d
 asm-fmts = vd, vj, vk
 data-types = V2DF, V2DF, V2DF
 
 /// lsx_vfmax_s
+impl = portable
 name = lsx_vfmax_s
 asm-fmts = vd, vj, vk
 data-types = V4SF, V4SF, V4SF
 
 /// lsx_vfmax_d
+impl = portable
 name = lsx_vfmax_d
 asm-fmts = vd, vj, vk
 data-types = V2DF, V2DF, V2DF
 
 /// lsx_vfmaxa_s
+impl = portable
 name = lsx_vfmaxa_s
 asm-fmts = vd, vj, vk
 data-types = V4SF, V4SF, V4SF
 
 /// lsx_vfmaxa_d
+impl = portable
 name = lsx_vfmaxa_d
 asm-fmts = vd, vj, vk
 data-types = V2DF, V2DF, V2DF

@@ -602,3 +602,20 @@ macro_rules! impl_vugv {
 }
 
 pub(super) use impl_vugv;
+
+macro_rules! impl_vgv_v {
+    ($ft:literal, $name:ident, $op:ident, $oty:ty, $ity:ident) => {
+        #[inline]
+        #[target_feature(enable = $ft)]
+        #[unstable(feature = "stdarch_loongarch", issue = "117427")]
+        pub fn $name(a: $oty, b: i32) -> $oty {
+            unsafe {
+                let a: $ity = transmute(a);
+                let r: $ity = $op(a, b);
+                transmute(r)
+            }
+        }
+    };
+}
+
+pub(super) use impl_vgv_v;

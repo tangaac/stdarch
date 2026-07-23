@@ -206,6 +206,46 @@ const unsafe fn simd_ext_replve0_q<T: Copy>(a: T) -> T {
 }
 
 #[inline(always)]
+unsafe fn simd_ext_xvreplve_b(a: i8x32, idx: i32) -> i8x32 {
+    let t = (idx & 15) as u32;
+    let low = simd_extract_dyn::<_, i8>(a, t);
+    let high = simd_extract_dyn::<_, i8>(a, t + 16);
+    let low16: i8x16 = simd_splat(low);
+    let high16: i8x16 = simd_splat(high);
+    simd_shuffle!(low16, high16, [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16])
+}
+
+#[inline(always)]
+unsafe fn simd_ext_xvreplve_h(a: i16x16, idx: i32) -> i16x16 {
+    let t = (idx & 7) as u32;
+    let low = simd_extract_dyn::<_, i16>(a, t);
+    let high = simd_extract_dyn::<_, i16>(a, t + 8);
+    let low8: i16x8 = simd_splat(low);
+    let high8: i16x8 = simd_splat(high);
+    simd_shuffle!(low8, high8, [0, 0, 0, 0, 0, 0, 0, 0, 8, 8, 8, 8, 8, 8, 8, 8])
+}
+
+#[inline(always)]
+unsafe fn simd_ext_xvreplve_w(a: i32x8, idx: i32) -> i32x8 {
+    let t = (idx & 3) as u32;
+    let low = simd_extract_dyn::<_, i32>(a, t);
+    let high = simd_extract_dyn::<_, i32>(a, t + 4);
+    let low4: i32x4 = simd_splat(low);
+    let high4: i32x4 = simd_splat(high);
+    simd_shuffle!(low4, high4, [0, 0, 0, 0, 4, 4, 4, 4])
+}
+
+#[inline(always)]
+unsafe fn simd_ext_xvreplve_d(a: i64x4, idx: i32) -> i64x4 {
+    let t = (idx & 1) as u32;
+    let low = simd_extract_dyn::<_, i64>(a, t);
+    let high = simd_extract_dyn::<_, i64>(a, t + 2);
+    let low2: i64x2 = simd_splat(low);
+    let high2: i64x2 = simd_splat(high);
+    simd_shuffle!(low2, high2, [0, 0, 2, 2])
+}
+
+#[inline(always)]
 #[rustc_const_unstable(feature = "stdarch_const_helpers", issue = "none")]
 const unsafe fn simd_ext_packev_b<T: Copy>(a: T, b: T) -> T {
     simd_shuffle!(
@@ -617,6 +657,10 @@ impl_vv!("lasx", lasx_xvreplve0_h, simd_ext_replve0_h, m256i, i16x16);
 impl_vv!("lasx", lasx_xvreplve0_w, simd_ext_replve0_w, m256i, i32x8);
 impl_vv!("lasx", lasx_xvreplve0_d, simd_ext_replve0_d, m256i, i64x4);
 impl_vv!("lasx", lasx_xvreplve0_q, simd_ext_replve0_q, m256i, i64x4);
+impl_vgv_v!("lasx", lasx_xvreplve_b, simd_ext_xvreplve_b, m256i, i8x32);
+impl_vgv_v!("lasx", lasx_xvreplve_h, simd_ext_xvreplve_h, m256i, i16x16);
+impl_vgv_v!("lasx", lasx_xvreplve_w, simd_ext_xvreplve_w, m256i, i32x8);
+impl_vgv_v!("lasx", lasx_xvreplve_d, simd_ext_xvreplve_d, m256i, i64x4);
 
 impl_gv!("lasx", lasx_xvreplgr2vr_b, simd_ext_splat, m256i, i8x32, i32);
 impl_gv!("lasx", lasx_xvreplgr2vr_h, simd_ext_splat, m256i, i16x16, i32);

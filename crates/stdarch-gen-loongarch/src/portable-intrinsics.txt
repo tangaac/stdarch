@@ -251,6 +251,10 @@ lsx_vreplvei_b
 lsx_vreplvei_h
 lsx_vreplvei_w
 lsx_vreplvei_d
+lsx_vreplve_b
+lsx_vreplve_h
+lsx_vreplve_w
+lsx_vreplve_d
 lsx_vpackev_b
 lsx_vpackev_h
 lsx_vpackev_w
@@ -549,6 +553,10 @@ lasx_xvreplve0_h
 lasx_xvreplve0_w
 lasx_xvreplve0_d
 lasx_xvreplve0_q
+lasx_xvreplve_b
+lasx_xvreplve_h
+lasx_xvreplve_w
+lasx_xvreplve_d
 lasx_xvpackev_b
 lasx_xvpackev_h
 lasx_xvpackev_w

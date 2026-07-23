@@ -2016,21 +2016,25 @@ asm-fmts = xd, xj
 data-types = V4DF, UV4DI
 
 /// lasx_xvreplve_b
+impl = portable
 name = lasx_xvreplve_b
 asm-fmts = xd, xj, rk
 data-types = V32QI, V32QI, SI
 
 /// lasx_xvreplve_h
+impl = portable
 name = lasx_xvreplve_h
 asm-fmts = xd, xj, rk
 data-types = V16HI, V16HI, SI
 
 /// lasx_xvreplve_w
+impl = portable
 name = lasx_xvreplve_w
 asm-fmts = xd, xj, rk
 data-types = V8SI, V8SI, SI
 
 /// lasx_xvreplve_d
+impl = portable
 name = lasx_xvreplve_d
 asm-fmts = xd, xj, rk
 data-types = V4DI, V4DI, SI

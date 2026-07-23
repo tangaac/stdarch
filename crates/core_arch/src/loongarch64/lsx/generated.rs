@@ -147,14 +147,6 @@ unsafe extern "unadjusted" {
     fn __lsx_vhsubw_wu_hu(a: __v8u16, b: __v8u16) -> __v4i32;
     #[link_name = "llvm.loongarch.lsx.vhsubw.du.wu"]
     fn __lsx_vhsubw_du_wu(a: __v4u32, b: __v4u32) -> __v2i64;
-    #[link_name = "llvm.loongarch.lsx.vreplve.b"]
-    fn __lsx_vreplve_b(a: __v16i8, b: i32) -> __v16i8;
-    #[link_name = "llvm.loongarch.lsx.vreplve.h"]
-    fn __lsx_vreplve_h(a: __v8i16, b: i32) -> __v8i16;
-    #[link_name = "llvm.loongarch.lsx.vreplve.w"]
-    fn __lsx_vreplve_w(a: __v4i32, b: i32) -> __v4i32;
-    #[link_name = "llvm.loongarch.lsx.vreplve.d"]
-    fn __lsx_vreplve_d(a: __v2i64, b: i32) -> __v2i64;
     #[link_name = "llvm.loongarch.lsx.vshuf.h"]
     fn __lsx_vshuf_h(a: __v8i16, b: __v8i16, c: __v8i16) -> __v8i16;
     #[link_name = "llvm.loongarch.lsx.vshuf.w"]
@@ -1397,34 +1389,6 @@ pub fn lsx_vhsubw_wu_hu(a: m128i, b: m128i) -> m128i {
 #[unstable(feature = "stdarch_loongarch", issue = "117427")]
 pub fn lsx_vhsubw_du_wu(a: m128i, b: m128i) -> m128i {
     unsafe { transmute(__lsx_vhsubw_du_wu(transmute(a), transmute(b))) }
-}
-
-#[inline]
-#[target_feature(enable = "lsx")]
-#[unstable(feature = "stdarch_loongarch", issue = "117427")]
-pub fn lsx_vreplve_b(a: m128i, b: i32) -> m128i {
-    unsafe { transmute(__lsx_vreplve_b(transmute(a), transmute(b))) }
-}
-
-#[inline]
-#[target_feature(enable = "lsx")]
-#[unstable(feature = "stdarch_loongarch", issue = "117427")]
-pub fn lsx_vreplve_h(a: m128i, b: i32) -> m128i {
-    unsafe { transmute(__lsx_vreplve_h(transmute(a), transmute(b))) }
-}
-
-#[inline]
-#[target_feature(enable = "lsx")]
-#[unstable(feature = "stdarch_loongarch", issue = "117427")]
-pub fn lsx_vreplve_w(a: m128i, b: i32) -> m128i {
-    unsafe { transmute(__lsx_vreplve_w(transmute(a), transmute(b))) }
-}
-
-#[inline]
-#[target_feature(enable = "lsx")]
-#[unstable(feature = "stdarch_loongarch", issue = "117427")]
-pub fn lsx_vreplve_d(a: m128i, b: i32) -> m128i {
-    unsafe { transmute(__lsx_vreplve_d(transmute(a), transmute(b))) }
 }
 
 #[inline]

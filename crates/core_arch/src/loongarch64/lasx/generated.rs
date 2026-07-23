@@ -247,14 +247,6 @@ unsafe extern "unadjusted" {
     fn __lasx_xvffint_s_wu(a: __v8u32) -> __v8f32;
     #[link_name = "llvm.loongarch.lasx.xvffint.d.lu"]
     fn __lasx_xvffint_d_lu(a: __v4u64) -> __v4f64;
-    #[link_name = "llvm.loongarch.lasx.xvreplve.b"]
-    fn __lasx_xvreplve_b(a: __v32i8, b: i32) -> __v32i8;
-    #[link_name = "llvm.loongarch.lasx.xvreplve.h"]
-    fn __lasx_xvreplve_h(a: __v16i16, b: i32) -> __v16i16;
-    #[link_name = "llvm.loongarch.lasx.xvreplve.w"]
-    fn __lasx_xvreplve_w(a: __v8i32, b: i32) -> __v8i32;
-    #[link_name = "llvm.loongarch.lasx.xvreplve.d"]
-    fn __lasx_xvreplve_d(a: __v4i64, b: i32) -> __v4i64;
     #[link_name = "llvm.loongarch.lasx.xvpermi.w"]
     fn __lasx_xvpermi_w(a: __v8i32, b: __v8i32, c: u32) -> __v8i32;
     #[link_name = "llvm.loongarch.lasx.xvsllwil.h.b"]
@@ -1837,34 +1829,6 @@ pub fn lasx_xvffint_s_wu(a: m256i) -> m256 {
 #[unstable(feature = "stdarch_loongarch", issue = "117427")]
 pub fn lasx_xvffint_d_lu(a: m256i) -> m256d {
     unsafe { transmute(__lasx_xvffint_d_lu(transmute(a))) }
-}
-
-#[inline]
-#[target_feature(enable = "lasx")]
-#[unstable(feature = "stdarch_loongarch", issue = "117427")]
-pub fn lasx_xvreplve_b(a: m256i, b: i32) -> m256i {
-    unsafe { transmute(__lasx_xvreplve_b(transmute(a), transmute(b))) }
-}
-
-#[inline]
-#[target_feature(enable = "lasx")]
-#[unstable(feature = "stdarch_loongarch", issue = "117427")]
-pub fn lasx_xvreplve_h(a: m256i, b: i32) -> m256i {
-    unsafe { transmute(__lasx_xvreplve_h(transmute(a), transmute(b))) }
-}
-
-#[inline]
-#[target_feature(enable = "lasx")]
-#[unstable(feature = "stdarch_loongarch", issue = "117427")]
-pub fn lasx_xvreplve_w(a: m256i, b: i32) -> m256i {
-    unsafe { transmute(__lasx_xvreplve_w(transmute(a), transmute(b))) }
-}
-
-#[inline]
-#[target_feature(enable = "lasx")]
-#[unstable(feature = "stdarch_loongarch", issue = "117427")]
-pub fn lasx_xvreplve_d(a: m256i, b: i32) -> m256i {
-    unsafe { transmute(__lasx_xvreplve_d(transmute(a), transmute(b))) }
 }
 
 #[inline]

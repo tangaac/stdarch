@@ -126,6 +126,26 @@ const unsafe fn simd_ext_replvei_d<const I: u32, T: Copy>(a: T) -> T {
 }
 
 #[inline(always)]
+unsafe fn simd_ext_replve_b(a: i8x16, idx: i32) -> i8x16 {
+    simd_splat(simd_extract_dyn::<_, i8>(a, (idx & 15) as u32))
+}
+
+#[inline(always)]
+unsafe fn simd_ext_replve_h(a: i16x8, idx: i32) -> i16x8 {
+    simd_splat(simd_extract_dyn::<_, i16>(a, (idx & 7) as u32))
+}
+
+#[inline(always)]
+unsafe fn simd_ext_replve_w(a: i32x4, idx: i32) -> i32x4 {
+    simd_splat(simd_extract_dyn::<_, i32>(a, (idx & 3) as u32))
+}
+
+#[inline(always)]
+unsafe fn simd_ext_replve_d(a: i64x2, idx: i32) -> i64x2 {
+    simd_splat(simd_extract_dyn::<_, i64>(a, (idx & 1) as u32))
+}
+
+#[inline(always)]
 #[rustc_const_unstable(feature = "stdarch_const_helpers", issue = "none")]
 const unsafe fn simd_ext_packev_b<T: Copy>(a: T, b: T) -> T {
     simd_shuffle!(b, a, [0, 16, 2, 18, 4, 20, 6, 22, 8, 24, 10, 26, 12, 28, 14, 30])
@@ -514,6 +534,10 @@ impl_vuv!("lsx", lsx_vreplvei_b, simd_ext_replvei_b, m128i, i8x16, 4, const);
 impl_vuv!("lsx", lsx_vreplvei_h, simd_ext_replvei_h, m128i, i16x8, 3, const);
 impl_vuv!("lsx", lsx_vreplvei_w, simd_ext_replvei_w, m128i, i32x4, 2, const);
 impl_vuv!("lsx", lsx_vreplvei_d, simd_ext_replvei_d, m128i, i64x2, 1, const);
+impl_vgv_v!("lsx", lsx_vreplve_b, simd_ext_replve_b, m128i, i8x16);
+impl_vgv_v!("lsx", lsx_vreplve_h, simd_ext_replve_h, m128i, i16x8);
+impl_vgv_v!("lsx", lsx_vreplve_w, simd_ext_replve_w, m128i, i32x4);
+impl_vgv_v!("lsx", lsx_vreplve_d, simd_ext_replve_d, m128i, i64x2);
 impl_vuv!("lsx", lsx_vshuf4i_b, simd_ext_shuf4i_b, m128i, i8x16, 8, const);
 impl_vuv!("lsx", lsx_vshuf4i_h, simd_ext_shuf4i_h, m128i, i16x8, 8, const);
 impl_vuv!("lsx", lsx_vshuf4i_w, simd_ext_shuf4i_w, m128i, i32x4, 8, const);

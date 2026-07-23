@@ -1400,21 +1400,25 @@ asm-fmts = vd, vj, vk
 data-types = UV2DI, UV2DI, UV2DI
 
 /// lsx_vreplve_b
+impl = portable
 name = lsx_vreplve_b
 asm-fmts = vd, vj, rk
 data-types = V16QI, V16QI, SI
 
 /// lsx_vreplve_h
+impl = portable
 name = lsx_vreplve_h
 asm-fmts = vd, vj, rk
 data-types = V8HI, V8HI, SI
 
 /// lsx_vreplve_w
+impl = portable
 name = lsx_vreplve_w
 asm-fmts = vd, vj, rk
 data-types = V4SI, V4SI, SI
 
 /// lsx_vreplve_d
+impl = portable
 name = lsx_vreplve_d
 asm-fmts = vd, vj, rk
 data-types = V2DI, V2DI, SI

@@ -263,6 +263,10 @@ lsx_vshuf4i_b
 lsx_vshuf4i_h
 lsx_vshuf4i_w
 lsx_vshuf4i_d
+lsx_vsigncov_b
+lsx_vsigncov_h
+lsx_vsigncov_w
+lsx_vsigncov_d
 lsx_vld
 lsx_vst
 lsx_vldx
@@ -560,6 +564,10 @@ lasx_xvpackod_d
 lasx_xvshuf4i_b
 lasx_xvshuf4i_h
 lasx_xvshuf4i_w
+lasx_xvsigncov_b
+lasx_xvsigncov_h
+lasx_xvsigncov_w
+lasx_xvsigncov_d
 lasx_xvld
 lasx_xvst
 lasx_xvldx

@@ -800,6 +800,11 @@ impl_vvv!("lasx", lasx_xvpackod_h, simd_ext_packod_h, m256i, i16x16);
 impl_vvv!("lasx", lasx_xvpackod_w, simd_ext_packod_w, m256i, i32x8);
 impl_vvv!("lasx", lasx_xvpackod_d, simd_ext_packod_d, m256i, i64x4);
 
+impl_vvv!("lasx", lasx_xvsigncov_b, simd_ext_signcov, m256i, i8x32);
+impl_vvv!("lasx", lasx_xvsigncov_h, simd_ext_signcov, m256i, i16x16);
+impl_vvv!("lasx", lasx_xvsigncov_w, simd_ext_signcov, m256i, i32x8);
+impl_vvv!("lasx", lasx_xvsigncov_d, simd_ext_signcov, m256i, i64x4);
+
 impl_vgg!("lasx", lasx_xvstx, simd_ext_stx, m256i, i8x32, *mut i8, i64, unsafe);
 
 impl_vgs!("lasx", lasx_xvst, simd_ext_st, m256i, i8x32, *mut i8, 12, const, unsafe);

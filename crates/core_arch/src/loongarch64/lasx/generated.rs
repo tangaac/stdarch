@@ -355,14 +355,6 @@ unsafe extern "unadjusted" {
     fn __lasx_xvmskltz_w(a: __v8i32) -> __v8i32;
     #[link_name = "llvm.loongarch.lasx.xvmskltz.d"]
     fn __lasx_xvmskltz_d(a: __v4i64) -> __v4i64;
-    #[link_name = "llvm.loongarch.lasx.xvsigncov.b"]
-    fn __lasx_xvsigncov_b(a: __v32i8, b: __v32i8) -> __v32i8;
-    #[link_name = "llvm.loongarch.lasx.xvsigncov.h"]
-    fn __lasx_xvsigncov_h(a: __v16i16, b: __v16i16) -> __v16i16;
-    #[link_name = "llvm.loongarch.lasx.xvsigncov.w"]
-    fn __lasx_xvsigncov_w(a: __v8i32, b: __v8i32) -> __v8i32;
-    #[link_name = "llvm.loongarch.lasx.xvsigncov.d"]
-    fn __lasx_xvsigncov_d(a: __v4i64, b: __v4i64) -> __v4i64;
     #[link_name = "llvm.loongarch.lasx.xvftintrne.w.s"]
     fn __lasx_xvftintrne_w_s(a: __v8f32) -> __v8i32;
     #[link_name = "llvm.loongarch.lasx.xvftintrne.l.d"]
@@ -2243,34 +2235,6 @@ pub fn lasx_xvmskltz_w(a: m256i) -> m256i {
 #[unstable(feature = "stdarch_loongarch", issue = "117427")]
 pub fn lasx_xvmskltz_d(a: m256i) -> m256i {
     unsafe { transmute(__lasx_xvmskltz_d(transmute(a))) }
-}
-
-#[inline]
-#[target_feature(enable = "lasx")]
-#[unstable(feature = "stdarch_loongarch", issue = "117427")]
-pub fn lasx_xvsigncov_b(a: m256i, b: m256i) -> m256i {
-    unsafe { transmute(__lasx_xvsigncov_b(transmute(a), transmute(b))) }
-}
-
-#[inline]
-#[target_feature(enable = "lasx")]
-#[unstable(feature = "stdarch_loongarch", issue = "117427")]
-pub fn lasx_xvsigncov_h(a: m256i, b: m256i) -> m256i {
-    unsafe { transmute(__lasx_xvsigncov_h(transmute(a), transmute(b))) }
-}
-
-#[inline]
-#[target_feature(enable = "lasx")]
-#[unstable(feature = "stdarch_loongarch", issue = "117427")]
-pub fn lasx_xvsigncov_w(a: m256i, b: m256i) -> m256i {
-    unsafe { transmute(__lasx_xvsigncov_w(transmute(a), transmute(b))) }
-}
-
-#[inline]
-#[target_feature(enable = "lasx")]
-#[unstable(feature = "stdarch_loongarch", issue = "117427")]
-pub fn lasx_xvsigncov_d(a: m256i, b: m256i) -> m256i {
-    unsafe { transmute(__lasx_xvsigncov_d(transmute(a), transmute(b))) }
 }
 
 #[inline]

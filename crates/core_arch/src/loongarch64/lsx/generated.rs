@@ -349,14 +349,6 @@ unsafe extern "unadjusted" {
     fn __lsx_vmskltz_w(a: __v4i32) -> __v4i32;
     #[link_name = "llvm.loongarch.lsx.vmskltz.d"]
     fn __lsx_vmskltz_d(a: __v2i64) -> __v2i64;
-    #[link_name = "llvm.loongarch.lsx.vsigncov.b"]
-    fn __lsx_vsigncov_b(a: __v16i8, b: __v16i8) -> __v16i8;
-    #[link_name = "llvm.loongarch.lsx.vsigncov.h"]
-    fn __lsx_vsigncov_h(a: __v8i16, b: __v8i16) -> __v8i16;
-    #[link_name = "llvm.loongarch.lsx.vsigncov.w"]
-    fn __lsx_vsigncov_w(a: __v4i32, b: __v4i32) -> __v4i32;
-    #[link_name = "llvm.loongarch.lsx.vsigncov.d"]
-    fn __lsx_vsigncov_d(a: __v2i64, b: __v2i64) -> __v2i64;
     #[link_name = "llvm.loongarch.lsx.vftintrne.w.s"]
     fn __lsx_vftintrne_w_s(a: __v4f32) -> __v4i32;
     #[link_name = "llvm.loongarch.lsx.vftintrne.l.d"]
@@ -2138,34 +2130,6 @@ pub fn lsx_vmskltz_w(a: m128i) -> m128i {
 #[unstable(feature = "stdarch_loongarch", issue = "117427")]
 pub fn lsx_vmskltz_d(a: m128i) -> m128i {
     unsafe { transmute(__lsx_vmskltz_d(transmute(a))) }
-}
-
-#[inline]
-#[target_feature(enable = "lsx")]
-#[unstable(feature = "stdarch_loongarch", issue = "117427")]
-pub fn lsx_vsigncov_b(a: m128i, b: m128i) -> m128i {
-    unsafe { transmute(__lsx_vsigncov_b(transmute(a), transmute(b))) }
-}
-
-#[inline]
-#[target_feature(enable = "lsx")]
-#[unstable(feature = "stdarch_loongarch", issue = "117427")]
-pub fn lsx_vsigncov_h(a: m128i, b: m128i) -> m128i {
-    unsafe { transmute(__lsx_vsigncov_h(transmute(a), transmute(b))) }
-}
-
-#[inline]
-#[target_feature(enable = "lsx")]
-#[unstable(feature = "stdarch_loongarch", issue = "117427")]
-pub fn lsx_vsigncov_w(a: m128i, b: m128i) -> m128i {
-    unsafe { transmute(__lsx_vsigncov_w(transmute(a), transmute(b))) }
-}
-
-#[inline]
-#[target_feature(enable = "lsx")]
-#[unstable(feature = "stdarch_loongarch", issue = "117427")]
-pub fn lsx_vsigncov_d(a: m128i, b: m128i) -> m128i {
-    unsafe { transmute(__lsx_vsigncov_d(transmute(a), transmute(b))) }
 }
 
 #[inline]

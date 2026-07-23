@@ -286,6 +286,15 @@ pub(super) const unsafe fn simd_ext_shr<T: Copy + const SimdExt>(a: T, b: T) -> 
 
 #[inline(always)]
 #[rustc_const_unstable(feature = "stdarch_const_helpers", issue = "none")]
+pub(super) const unsafe fn simd_ext_signcov<T: Copy + const SimdExt>(a: T, b: T) -> T {
+    let z = simd_ext_splat(0);
+    let is_zero: T = simd_eq(a, z);
+    let is_neg: T = simd_lt(a, z);
+    simd_select(is_zero, z, simd_select(is_neg, simd_neg(b), b))
+}
+
+#[inline(always)]
+#[rustc_const_unstable(feature = "stdarch_const_helpers", issue = "none")]
 pub(super) const unsafe fn simd_ext_splat<T: Copy + const SimdExt>(a: i64) -> T {
     T::splat(a)
 }

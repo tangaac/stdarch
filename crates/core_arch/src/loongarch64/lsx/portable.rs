@@ -470,6 +470,11 @@ impl_vvv!("lsx", lsx_vpackod_h, simd_ext_packod_h, m128i, i16x8);
 impl_vvv!("lsx", lsx_vpackod_w, simd_ext_packod_w, m128i, i32x4);
 impl_vvv!("lsx", lsx_vpackod_d, simd_ext_packod_d, m128i, i64x2);
 
+impl_vvv!("lsx", lsx_vsigncov_b, simd_ext_signcov, m128i, i8x16);
+impl_vvv!("lsx", lsx_vsigncov_h, simd_ext_signcov, m128i, i16x8);
+impl_vvv!("lsx", lsx_vsigncov_w, simd_ext_signcov, m128i, i32x4);
+impl_vvv!("lsx", lsx_vsigncov_d, simd_ext_signcov, m128i, i64x2);
+
 impl_vgg!("lsx", lsx_vstx, simd_ext_stx, m128i, i8x16, *mut i8, i64, unsafe);
 
 impl_vgs!("lsx", lsx_vst, simd_ext_st, m128i, i8x16, *mut i8, 12, const, unsafe);

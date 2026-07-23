@@ -2376,21 +2376,25 @@ asm-fmts = xd, xj
 data-types = V4DI, V4DI
 
 /// lasx_xvsigncov_b
+impl = portable
 name = lasx_xvsigncov_b
 asm-fmts = xd, xj, xk
 data-types = V32QI, V32QI, V32QI
 
 /// lasx_xvsigncov_h
+impl = portable
 name = lasx_xvsigncov_h
 asm-fmts = xd, xj, xk
 data-types = V16HI, V16HI, V16HI
 
 /// lasx_xvsigncov_w
+impl = portable
 name = lasx_xvsigncov_w
 asm-fmts = xd, xj, xk
 data-types = V8SI, V8SI, V8SI
 
 /// lasx_xvsigncov_d
+impl = portable
 name = lasx_xvsigncov_d
 asm-fmts = xd, xj, xk
 data-types = V4DI, V4DI, V4DI

@@ -257,6 +257,12 @@ pub(super) const unsafe fn simd_ext_not<T: Copy + const SimdExt>(a: T) -> T {
 
 #[inline(always)]
 #[rustc_const_unstable(feature = "stdarch_const_helpers", issue = "none")]
+pub(super) const unsafe fn simd_ext_clo<T: Copy + const SimdExt>(a: T) -> T {
+    simd_ctlz(simd_ext_not(a))
+}
+
+#[inline(always)]
+#[rustc_const_unstable(feature = "stdarch_const_helpers", issue = "none")]
 pub(super) const unsafe fn simd_ext_orn<T: Copy + const SimdExt>(a: T, b: T) -> T {
     simd_or(a, simd_ext_not(b))
 }

@@ -584,6 +584,46 @@ macro_rules! impl_vvuv {
 
 pub(super) use impl_vvuv;
 
+/// SRLR: logical shift right with rounding.
+///   if sa == 0: result = x
+///   else:       result = (x >> sa) + x[sa-1]
+#[inline(always)]
+#[rustc_const_unstable(feature = "stdarch_const_helpers", issue = "none")]
+pub(super) const unsafe fn simd_ext_srlr<T: Copy + const SimdExt>(a: T, b: T) -> T {
+    let width = (size_of::<T::Elem>() * 8) as i64;
+    let b = simd_and(b, simd_ext_splat(width - 1));
+    let is_zero: T = simd_eq(b, simd_ext_splat(0));
+    let shifted = simd_ext_shr(a, b);
+    let round = simd_and(
+        simd_ext_shr(a, simd_sub(b, simd_ext_splat(1))),
+        simd_ext_splat(1),
+    );
+    simd_select(is_zero, a, simd_add(shifted, round))
+}
+
+/// SRAR: arithmetic shift right with rounding.
+///   if sa == 0: result = x
+///   else:       result = (x arithmetic>> sa) + x[sa-1]
+#[inline(always)]
+#[rustc_const_unstable(feature = "stdarch_const_helpers", issue = "none")]
+pub(super) const unsafe fn simd_ext_srar<T: Copy + const SimdExt>(a: T, b: T) -> T {
+    let width = (size_of::<T::Elem>() * 8) as i64;
+    let b = simd_and(b, simd_ext_splat(width - 1));
+    let is_zero: T = simd_eq(b, simd_ext_splat(0));
+    let lshr = simd_ext_shr(a, b);
+    let sign_mask: T = simd_lt(a, simd_ext_splat(0));
+    let fill = simd_and(
+        sign_mask,
+        simd_shl(simd_ext_splat(-1), simd_sub(simd_ext_splat(width), b)),
+    );
+    let shifted = simd_or(lshr, fill);
+    let round = simd_and(
+        simd_ext_shr(a, simd_sub(b, simd_ext_splat(1))),
+        simd_ext_splat(1),
+    );
+    simd_select(is_zero, a, simd_add(shifted, round))
+}
+
 macro_rules! impl_vugv {
     ($ft:literal, $name:ident, $op:ident, $oty:ty, $ity:ident, $gty:ty, $ibs:expr) => {
         #[inline]

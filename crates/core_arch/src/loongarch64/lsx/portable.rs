@@ -393,6 +393,16 @@ impl_vvv!("lsx", lsx_vsrl_b, simd_ext_shr, m128i, u8x16);
 impl_vvv!("lsx", lsx_vsrl_h, simd_ext_shr, m128i, u16x8);
 impl_vvv!("lsx", lsx_vsrl_w, simd_ext_shr, m128i, u32x4);
 impl_vvv!("lsx", lsx_vsrl_d, simd_ext_shr, m128i, u64x2);
+// VSRLR — logical right shift with rounding (vector-vector)
+impl_vvv!("lsx", lsx_vsrlr_b, simd_ext_srlr, m128i, u8x16);
+impl_vvv!("lsx", lsx_vsrlr_h, simd_ext_srlr, m128i, u16x8);
+impl_vvv!("lsx", lsx_vsrlr_w, simd_ext_srlr, m128i, u32x4);
+impl_vvv!("lsx", lsx_vsrlr_d, simd_ext_srlr, m128i, u64x2);
+// VSRAR — arithmetic right shift with rounding (vector-vector)
+impl_vvv!("lsx", lsx_vsrar_b, simd_ext_srar, m128i, i8x16);
+impl_vvv!("lsx", lsx_vsrar_h, simd_ext_srar, m128i, i16x8);
+impl_vvv!("lsx", lsx_vsrar_w, simd_ext_srar, m128i, i32x4);
+impl_vvv!("lsx", lsx_vsrar_d, simd_ext_srar, m128i, i64x2);
 impl_vvv!("lsx", lsx_vrotr_b, simd_ext_rotr, m128i, u8x16);
 impl_vvv!("lsx", lsx_vrotr_h, simd_ext_rotr, m128i, u16x8);
 impl_vvv!("lsx", lsx_vrotr_w, simd_ext_rotr, m128i, u32x4);
@@ -486,6 +496,16 @@ impl_vuv!("lsx", lsx_vsrli_b, simd_shr, m128i, u8x16);
 impl_vuv!("lsx", lsx_vsrli_h, simd_shr, m128i, u16x8);
 impl_vuv!("lsx", lsx_vsrli_w, simd_shr, m128i, u32x4);
 impl_vuv!("lsx", lsx_vsrli_d, simd_shr, m128i, u64x2);
+// VSRLRI — logical right shift with rounding (immediate)
+impl_vuv!("lsx", lsx_vsrlri_b, simd_ext_srlr, m128i, u8x16);
+impl_vuv!("lsx", lsx_vsrlri_h, simd_ext_srlr, m128i, u16x8);
+impl_vuv!("lsx", lsx_vsrlri_w, simd_ext_srlr, m128i, u32x4);
+impl_vuv!("lsx", lsx_vsrlri_d, simd_ext_srlr, m128i, u64x2);
+// VSRARI — arithmetic right shift with rounding (immediate)
+impl_vuv!("lsx", lsx_vsrari_b, simd_ext_srar, m128i, i8x16);
+impl_vuv!("lsx", lsx_vsrari_h, simd_ext_srar, m128i, i16x8);
+impl_vuv!("lsx", lsx_vsrari_w, simd_ext_srar, m128i, i32x4);
+impl_vuv!("lsx", lsx_vsrari_d, simd_ext_srar, m128i, i64x2);
 impl_vuv!("lsx", lsx_vrotri_b, simd_ext_rotr, m128i, u8x16);
 impl_vuv!("lsx", lsx_vrotri_h, simd_ext_rotr, m128i, u16x8);
 impl_vuv!("lsx", lsx_vrotri_w, simd_ext_rotr, m128i, u32x4);

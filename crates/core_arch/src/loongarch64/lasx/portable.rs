@@ -723,6 +723,16 @@ impl_vvv!("lasx", lasx_xvsrl_b, simd_ext_shr, m256i, u8x32);
 impl_vvv!("lasx", lasx_xvsrl_h, simd_ext_shr, m256i, u16x16);
 impl_vvv!("lasx", lasx_xvsrl_w, simd_ext_shr, m256i, u32x8);
 impl_vvv!("lasx", lasx_xvsrl_d, simd_ext_shr, m256i, u64x4);
+// XVSRLR — logical right shift with rounding (vector-vector)
+impl_vvv!("lasx", lasx_xvsrlr_b, simd_ext_srlr, m256i, u8x32);
+impl_vvv!("lasx", lasx_xvsrlr_h, simd_ext_srlr, m256i, u16x16);
+impl_vvv!("lasx", lasx_xvsrlr_w, simd_ext_srlr, m256i, u32x8);
+impl_vvv!("lasx", lasx_xvsrlr_d, simd_ext_srlr, m256i, u64x4);
+// XVSRA R — arithmetic right shift with rounding (vector-vector)
+impl_vvv!("lasx", lasx_xvsrar_b, simd_ext_srar, m256i, i8x32);
+impl_vvv!("lasx", lasx_xvsrar_h, simd_ext_srar, m256i, i16x16);
+impl_vvv!("lasx", lasx_xvsrar_w, simd_ext_srar, m256i, i32x8);
+impl_vvv!("lasx", lasx_xvsrar_d, simd_ext_srar, m256i, i64x4);
 impl_vvv!("lasx", lasx_xvrotr_b, simd_ext_rotr, m256i, u8x32);
 impl_vvv!("lasx", lasx_xvrotr_h, simd_ext_rotr, m256i, u16x16);
 impl_vvv!("lasx", lasx_xvrotr_w, simd_ext_rotr, m256i, u32x8);
@@ -816,6 +826,16 @@ impl_vuv!("lasx", lasx_xvsrli_b, simd_shr, m256i, u8x32);
 impl_vuv!("lasx", lasx_xvsrli_h, simd_shr, m256i, u16x16);
 impl_vuv!("lasx", lasx_xvsrli_w, simd_shr, m256i, u32x8);
 impl_vuv!("lasx", lasx_xvsrli_d, simd_shr, m256i, u64x4);
+// XVSRLRI — logical right shift with rounding (immediate)
+impl_vuv!("lasx", lasx_xvsrlri_b, simd_ext_srlr, m256i, u8x32);
+impl_vuv!("lasx", lasx_xvsrlri_h, simd_ext_srlr, m256i, u16x16);
+impl_vuv!("lasx", lasx_xvsrlri_w, simd_ext_srlr, m256i, u32x8);
+impl_vuv!("lasx", lasx_xvsrlri_d, simd_ext_srlr, m256i, u64x4);
+// XVSRA RI — arithmetic right shift with rounding (immediate)
+impl_vuv!("lasx", lasx_xvsrari_b, simd_ext_srar, m256i, i8x32);
+impl_vuv!("lasx", lasx_xvsrari_h, simd_ext_srar, m256i, i16x16);
+impl_vuv!("lasx", lasx_xvsrari_w, simd_ext_srar, m256i, i32x8);
+impl_vuv!("lasx", lasx_xvsrari_d, simd_ext_srar, m256i, i64x4);
 impl_vuv!("lasx", lasx_xvrotri_b, simd_ext_rotr, m256i, u8x32);
 impl_vuv!("lasx", lasx_xvrotri_h, simd_ext_rotr, m256i, u16x16);
 impl_vuv!("lasx", lasx_xvrotri_w, simd_ext_rotr, m256i, u32x8);

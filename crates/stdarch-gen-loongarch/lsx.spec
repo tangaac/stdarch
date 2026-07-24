@@ -2419,21 +2419,25 @@ asm-fmts = vd, vj, ui8
 data-types = V2DI, V2DI, V2DI, USI
 
 /// lsx_vmskltz_b
+impl = portable
 name = lsx_vmskltz_b
 asm-fmts = vd, vj
 data-types = V16QI, V16QI
 
 /// lsx_vmskltz_h
+impl = portable
 name = lsx_vmskltz_h
 asm-fmts = vd, vj
 data-types = V8HI, V8HI
 
 /// lsx_vmskltz_w
+impl = portable
 name = lsx_vmskltz_w
 asm-fmts = vd, vj
 data-types = V4SI, V4SI
 
 /// lsx_vmskltz_d
+impl = portable
 name = lsx_vmskltz_d
 asm-fmts = vd, vj
 data-types = V2DI, V2DI
@@ -3207,11 +3211,13 @@ asm-fmts = vd, rj, si9
 data-types = V2DI, CVPOINTER, SI
 
 /// lsx_vmskgez_b
+impl = portable
 name = lsx_vmskgez_b
 asm-fmts = vd, vj
 data-types = V16QI, V16QI
 
 /// lsx_vmsknz_b
+impl = portable
 name = lsx_vmsknz_b
 asm-fmts = vd, vj
 data-types = V16QI, V16QI

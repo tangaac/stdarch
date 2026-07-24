@@ -574,6 +574,93 @@ impl_vugv!("lsx", lsx_vinsgr2vr_h, simd_insert, m128i, i16x8, i32, 3);
 impl_vugv!("lsx", lsx_vinsgr2vr_w, simd_insert, m128i, i32x4, i32, 2);
 impl_vugv!("lsx", lsx_vinsgr2vr_d, simd_insert, m128i, i64x2, i64, 1);
 
+#[inline(always)]
+unsafe fn simd_ext_vmskpack_b(a: m128i) -> m128i {
+    let a: i8x16 = transmute(a);
+    let bits: u8x16 = transmute(simd_and(a, simd_splat(1i8)));
+    let lo: u8x8 = simd_shuffle!(bits, bits, [0, 1, 2, 3, 4, 5, 6, 7]);
+    let hi: u8x8 = simd_shuffle!(bits, bits, [8, 9, 10, 11, 12, 13, 14, 15]);
+    let p = u8x8::new(1, 2, 4, 8, 16, 32, 64, 128);
+    let lo_r: u8 = simd_reduce_or(simd_mul(lo, p));
+    let hi_r: u8 = simd_reduce_or(simd_mul(hi, p));
+    transmute(i64x2::new(((lo_r as u16) | ((hi_r as u16) << 8)) as i64, 0))
+}
+
+#[inline(always)]
+unsafe fn simd_ext_vmskpack_h(a: m128i) -> m128i {
+    let a: i16x8 = transmute(a);
+    let bits: u16x8 = transmute(simd_and(a, simd_splat(1i16)));
+    let p = u16x8::new(1, 2, 4, 8, 16, 32, 64, 128);
+    let r: u16 = simd_reduce_or(simd_mul(bits, p));
+    transmute(i64x2::new(r as i64, 0))
+}
+
+#[inline(always)]
+unsafe fn simd_ext_vmskpack_w(a: m128i) -> m128i {
+    let a: i32x4 = transmute(a);
+    let bits: u32x4 = transmute(simd_and(a, simd_splat(1i32)));
+    let p = u32x4::new(1, 2, 4, 8);
+    let r: u32 = simd_reduce_or(simd_mul(bits, p));
+    transmute(i64x2::new(r as i64, 0))
+}
+
+#[inline(always)]
+unsafe fn simd_ext_vmskpack_d(a: m128i) -> m128i {
+    let a: i64x2 = transmute(a);
+    let bits: u64x2 = transmute(simd_and(a, simd_splat(1i64)));
+    let p = u64x2::new(1, 2);
+    let r: u64 = simd_reduce_or(simd_mul(bits, p));
+    transmute(i64x2::new(r as i64, 0))
+}
+
+#[inline]
+#[target_feature(enable = "lsx")]
+#[unstable(feature = "stdarch_loongarch", issue = "117427")]
+pub unsafe fn lsx_vmskgez_b(a: m128i) -> m128i {
+    let mask: m128i = transmute(simd_ge::<i8x16, i8x16>(transmute(a), simd_ext_splat(0i64)));
+    simd_ext_vmskpack_b(mask)
+}
+
+#[inline]
+#[target_feature(enable = "lsx")]
+#[unstable(feature = "stdarch_loongarch", issue = "117427")]
+pub unsafe fn lsx_vmskltz_b(a: m128i) -> m128i {
+    let mask: m128i = transmute(simd_lt::<i8x16, i8x16>(transmute(a), simd_ext_splat(0i64)));
+    simd_ext_vmskpack_b(mask)
+}
+
+#[inline]
+#[target_feature(enable = "lsx")]
+#[unstable(feature = "stdarch_loongarch", issue = "117427")]
+pub unsafe fn lsx_vmskltz_h(a: m128i) -> m128i {
+    let mask: m128i = transmute(simd_lt::<i16x8, i16x8>(transmute(a), simd_ext_splat(0i64)));
+    simd_ext_vmskpack_h(mask)
+}
+
+#[inline]
+#[target_feature(enable = "lsx")]
+#[unstable(feature = "stdarch_loongarch", issue = "117427")]
+pub unsafe fn lsx_vmskltz_w(a: m128i) -> m128i {
+    let mask: m128i = transmute(simd_lt::<i32x4, i32x4>(transmute(a), simd_ext_splat(0i64)));
+    simd_ext_vmskpack_w(mask)
+}
+
+#[inline]
+#[target_feature(enable = "lsx")]
+#[unstable(feature = "stdarch_loongarch", issue = "117427")]
+pub unsafe fn lsx_vmskltz_d(a: m128i) -> m128i {
+    let mask: m128i = transmute(simd_lt::<i64x2, i64x2>(transmute(a), simd_ext_splat(0i64)));
+    simd_ext_vmskpack_d(mask)
+}
+
+#[inline]
+#[target_feature(enable = "lsx")]
+#[unstable(feature = "stdarch_loongarch", issue = "117427")]
+pub unsafe fn lsx_vmsknz_b(a: m128i) -> m128i {
+    let mask: m128i = transmute(simd_ext_not(simd_eq::<i8x16, i8x16>(transmute(a), simd_ext_splat(0i64))));
+    simd_ext_vmskpack_b(mask)
+}
+
 #[cfg(test)]
 mod tests {
     use crate::{

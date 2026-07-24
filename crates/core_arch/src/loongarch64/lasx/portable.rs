@@ -896,6 +896,111 @@ impl_vvvv!("lasx", lasx_xvfnmsub_d, simd_ext_fnmsub, m256d, f64x4);
 impl_vugv!("lasx", lasx_xvinsgr2vr_w, simd_insert, m256i, i32x8, i32, 3);
 impl_vugv!("lasx", lasx_xvinsgr2vr_d, simd_insert, m256i, i64x4, i64, 2);
 
+#[inline(always)]
+unsafe fn simd_ext_xvmskpack_b(a: m256i) -> m256i {
+    let a: i8x32 = transmute(a);
+    let bits: u8x32 = transmute(simd_and(a, simd_splat(1i8)));
+    let g0: u8x8 = simd_shuffle!(bits, bits, [0, 1, 2, 3, 4, 5, 6, 7]);
+    let g1: u8x8 = simd_shuffle!(bits, bits, [8, 9, 10, 11, 12, 13, 14, 15]);
+    let g2: u8x8 = simd_shuffle!(bits, bits, [16, 17, 18, 19, 20, 21, 22, 23]);
+    let g3: u8x8 = simd_shuffle!(bits, bits, [24, 25, 26, 27, 28, 29, 30, 31]);
+    let p = u8x8::new(1, 2, 4, 8, 16, 32, 64, 128);
+    let r0: u8 = simd_reduce_or(simd_mul(g0, p));
+    let r1: u8 = simd_reduce_or(simd_mul(g1, p));
+    let r2: u8 = simd_reduce_or(simd_mul(g2, p));
+    let r3: u8 = simd_reduce_or(simd_mul(g3, p));
+    transmute(i64x4::new(
+        ((r0 as u16) | ((r1 as u16) << 8)) as i64,
+        0,
+        ((r2 as u16) | ((r3 as u16) << 8)) as i64,
+        0,
+    ))
+}
+
+#[inline(always)]
+unsafe fn simd_ext_xvmskpack_h(a: m256i) -> m256i {
+    let a: i16x16 = transmute(a);
+    let bits: u16x16 = transmute(simd_and(a, simd_splat(1i16)));
+    let lo: u16x8 = simd_shuffle!(bits, bits, [0, 1, 2, 3, 4, 5, 6, 7]);
+    let hi: u16x8 = simd_shuffle!(bits, bits, [8, 9, 10, 11, 12, 13, 14, 15]);
+    let p = u16x8::new(1, 2, 4, 8, 16, 32, 64, 128);
+    let lo_r: u16 = simd_reduce_or(simd_mul(lo, p));
+    let hi_r: u16 = simd_reduce_or(simd_mul(hi, p));
+    transmute(i64x4::new(lo_r as i64, 0, hi_r as i64, 0))
+}
+
+#[inline(always)]
+unsafe fn simd_ext_xvmskpack_w(a: m256i) -> m256i {
+    let a: i32x8 = transmute(a);
+    let bits: u32x8 = transmute(simd_and(a, simd_splat(1i32)));
+    let lo: u32x4 = simd_shuffle!(bits, bits, [0, 1, 2, 3]);
+    let hi: u32x4 = simd_shuffle!(bits, bits, [4, 5, 6, 7]);
+    let p = u32x4::new(1, 2, 4, 8);
+    let lo_r: u32 = simd_reduce_or(simd_mul(lo, p));
+    let hi_r: u32 = simd_reduce_or(simd_mul(hi, p));
+    transmute(i64x4::new(lo_r as i64, 0, hi_r as i64, 0))
+}
+
+#[inline(always)]
+unsafe fn simd_ext_xvmskpack_d(a: m256i) -> m256i {
+    let a: i64x4 = transmute(a);
+    let bits: u64x4 = transmute(simd_and(a, simd_splat(1i64)));
+    let lo: u64x2 = simd_shuffle!(bits, bits, [0, 1]);
+    let hi: u64x2 = simd_shuffle!(bits, bits, [2, 3]);
+    let p = u64x2::new(1, 2);
+    let lo_r: u64 = simd_reduce_or(simd_mul(lo, p));
+    let hi_r: u64 = simd_reduce_or(simd_mul(hi, p));
+    transmute(i64x4::new(lo_r as i64, 0, hi_r as i64, 0))
+}
+
+#[inline]
+#[target_feature(enable = "lasx")]
+#[unstable(feature = "stdarch_loongarch", issue = "117427")]
+pub unsafe fn lasx_xvmskgez_b(a: m256i) -> m256i {
+    let mask: m256i = transmute(simd_ge::<i8x32, i8x32>(transmute(a), simd_ext_splat(0i64)));
+    simd_ext_xvmskpack_b(mask)
+}
+
+#[inline]
+#[target_feature(enable = "lasx")]
+#[unstable(feature = "stdarch_loongarch", issue = "117427")]
+pub unsafe fn lasx_xvmskltz_b(a: m256i) -> m256i {
+    let mask: m256i = transmute(simd_lt::<i8x32, i8x32>(transmute(a), simd_ext_splat(0i64)));
+    simd_ext_xvmskpack_b(mask)
+}
+
+#[inline]
+#[target_feature(enable = "lasx")]
+#[unstable(feature = "stdarch_loongarch", issue = "117427")]
+pub unsafe fn lasx_xvmskltz_h(a: m256i) -> m256i {
+    let mask: m256i = transmute(simd_lt::<i16x16, i16x16>(transmute(a), simd_ext_splat(0i64)));
+    simd_ext_xvmskpack_h(mask)
+}
+
+#[inline]
+#[target_feature(enable = "lasx")]
+#[unstable(feature = "stdarch_loongarch", issue = "117427")]
+pub unsafe fn lasx_xvmskltz_w(a: m256i) -> m256i {
+    let mask: m256i = transmute(simd_lt::<i32x8, i32x8>(transmute(a), simd_ext_splat(0i64)));
+    simd_ext_xvmskpack_w(mask)
+}
+
+#[inline]
+#[target_feature(enable = "lasx")]
+#[unstable(feature = "stdarch_loongarch", issue = "117427")]
+pub unsafe fn lasx_xvmskltz_d(a: m256i) -> m256i {
+    let mask: m256i = transmute(simd_lt::<i64x4, i64x4>(transmute(a), simd_ext_splat(0i64)));
+    simd_ext_xvmskpack_d(mask)
+}
+
+#[inline]
+#[target_feature(enable = "lasx")]
+#[unstable(feature = "stdarch_loongarch", issue = "117427")]
+pub unsafe fn lasx_xvmsknz_b(a: m256i) -> m256i {
+    let mask: m256i = transmute(simd_ext_not(simd_eq::<i8x32, i8x32>(transmute(a), simd_ext_splat(0i64))));
+    simd_ext_xvmskpack_b(mask)
+}
+
 #[cfg(test)]
 mod tests {
     use crate::{

@@ -2356,21 +2356,25 @@ asm-fmts = xd, xj, ui8
 data-types = V4DI, V4DI, V4DI, USI
 
 /// lasx_xvmskltz_b
+impl = portable
 name = lasx_xvmskltz_b
 asm-fmts = xd, xj
 data-types = V32QI, V32QI
 
 /// lasx_xvmskltz_h
+impl = portable
 name = lasx_xvmskltz_h
 asm-fmts = xd, xj
 data-types = V16HI, V16HI
 
 /// lasx_xvmskltz_w
+impl = portable
 name = lasx_xvmskltz_w
 asm-fmts = xd, xj
 data-types = V8SI, V8SI
 
 /// lasx_xvmskltz_d
+impl = portable
 name = lasx_xvmskltz_d
 asm-fmts = xd, xj
 data-types = V4DI, V4DI
@@ -3376,11 +3380,13 @@ asm-fmts = xd, xj, xk
 data-types = V4DI, UV4DI, V4DI
 
 /// lasx_xvmskgez_b
+impl = portable
 name = lasx_xvmskgez_b
 asm-fmts = xd, xj
 data-types = V32QI, V32QI
 
 /// lasx_xvmsknz_b
+impl = portable
 name = lasx_xvmsknz_b
 asm-fmts = xd, xj
 data-types = V32QI, V32QI

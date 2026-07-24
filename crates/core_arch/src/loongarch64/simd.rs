@@ -89,6 +89,12 @@ pub(super) const unsafe fn simd_ext_bitclr<T: Copy + const SimdExt>(a: T, b: T) 
 
 #[inline(always)]
 #[rustc_const_unstable(feature = "stdarch_const_helpers", issue = "none")]
+pub(super) const unsafe fn simd_ext_bitsel<T: Copy + const SimdExt>(a: T, b: T, c: T) -> T {
+    simd_or(simd_and(simd_ext_not(a), b), simd_and(a, c))
+}
+
+#[inline(always)]
+#[rustc_const_unstable(feature = "stdarch_const_helpers", issue = "none")]
 pub(super) const unsafe fn simd_ext_bitrev<T: Copy + const SimdExt>(a: T, b: T) -> T {
     simd_xor(simd_ext_shl(simd_ext_splat(1), b), a)
 }

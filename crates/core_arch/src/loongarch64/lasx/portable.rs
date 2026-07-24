@@ -739,6 +739,33 @@ impl_vvv!("lasx", lasx_xvbitrev_b, simd_ext_bitrev, m256i, u8x32);
 impl_vvv!("lasx", lasx_xvbitrev_h, simd_ext_bitrev, m256i, u16x16);
 impl_vvv!("lasx", lasx_xvbitrev_w, simd_ext_bitrev, m256i, u32x8);
 impl_vvv!("lasx", lasx_xvbitrev_d, simd_ext_bitrev, m256i, u64x4);
+
+#[inline]
+#[target_feature(enable = "lasx")]
+#[unstable(feature = "stdarch_loongarch", issue = "117427")]
+pub fn lasx_xvbitsel_v(a: m256i, b: m256i, c: m256i) -> m256i {
+    unsafe {
+        let a: u8x32 = transmute(a);
+        let b: u8x32 = transmute(b);
+        let c: u8x32 = transmute(c);
+        transmute(simd_ext_bitsel(c, a, b))
+    }
+}
+
+#[inline]
+#[target_feature(enable = "lasx")]
+#[rustc_legacy_const_generics(2)]
+#[unstable(feature = "stdarch_loongarch", issue = "117427")]
+pub fn lasx_xvbitseli_b<const IMM8: u32>(a: m256i, b: m256i) -> m256i {
+    static_assert_uimm_bits!(IMM8, 8);
+    unsafe {
+        let a: u8x32 = transmute(a);
+        let b: u8x32 = transmute(b);
+        let m: u8x32 = simd_ext_splat(IMM8 as i64);
+        transmute(simd_ext_bitsel(a, b, m))
+    }
+}
+
 impl_vvv!("lasx", lasx_xvsadd_b, simd_saturating_add, m256i, i8x32);
 impl_vvv!("lasx", lasx_xvsadd_h, simd_saturating_add, m256i, i16x16);
 impl_vvv!("lasx", lasx_xvsadd_w, simd_saturating_add, m256i, i32x8);
